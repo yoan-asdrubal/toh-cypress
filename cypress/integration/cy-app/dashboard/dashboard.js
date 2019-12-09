@@ -1,7 +1,7 @@
 describe('Dashboard Component', () => {
 
     it('should Load Dashboard component on page component ', () => {
-        cy.visit('http://localhost:4200/dashboard');
+        cy.visit('dashboard');
         cy.get('.page-title .title').should('have.text', 'Dashboard');
     });
 
