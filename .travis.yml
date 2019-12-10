@@ -1,13 +1,24 @@
-# Editor configuration, see https://editorconfig.org
-root = true
 
-[*]
-charset = utf-8
-indent_style = space
-indent_size = 2
-insert_final_newline = true
-trim_trailing_whitespace = true
+language: node_js
 
-[*.md]
-max_line_length = off
-trim_trailing_whitespace = false
+node_js:
+    - "lts/*"
+
+cache:
+
+    directories:
+        - ~/.npm
+        - ./node_modules
+        - ~/.cache
+    override:
+        - npm ci
+        - npm run cy:verify
+
+install:
+    - npm ci
+
+script:
+    - ng lint
+    - ng build --prod
+    - npm run cy:verify
+    - npm run ci:cy-run
