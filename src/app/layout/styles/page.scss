@@ -2,10 +2,13 @@
   margin: 20px;
 }
 
-.page-container {
+.page-container, #app-content {
   margin: 20px;
 
   .page-title {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
     .title {
 
     }
