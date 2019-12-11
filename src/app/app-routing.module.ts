@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {Error404Component} from './layout/components/error404/error404.component';
+import {TohHomeComponent} from './layout/components/toh-home/toh-home.component';
 
 const routes: Routes = [
     {
@@ -9,6 +10,9 @@ const routes: Routes = [
     },
     {
         path: 'pathNotFound', component: Error404Component
+    },
+    {
+        path: '', pathMatch: 'full', component: TohHomeComponent
     },
     {
         path: '**', redirectTo: 'pathNotFound'

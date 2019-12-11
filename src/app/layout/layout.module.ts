@@ -9,11 +9,12 @@ import {MatListModule} from '@angular/material/list';
 import {LayoutModule} from '@angular/cdk/layout';
 import {RouterModule} from '@angular/router';
 import {Error404Component} from './components/error404/error404.component';
+import {TohHomeComponent} from './components/toh-home/toh-home.component';
 
 @NgModule({
-    declarations: [NavigationComponent, Error404Component],
+    declarations: [NavigationComponent, Error404Component, TohHomeComponent],
     exports: [
-        NavigationComponent, Error404Component
+        NavigationComponent, Error404Component, TohHomeComponent
     ],
     imports: [
         CommonModule,
