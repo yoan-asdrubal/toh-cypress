@@ -9,6 +9,10 @@ const routes: Routes = [
         loadChildren: () => import('./cy-app/dasboard/dasboard.module').then((m) => m.DasboardModule)
     },
     {
+        path: 'heroes',
+        loadChildren: () => import('./cy-app/heroes/heroes.module').then((m) => m.HeroesModule)
+    },
+    {
         path: 'pathNotFound', component: Error404Component
     },
     {

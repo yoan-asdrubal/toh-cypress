@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HeroesListComponent} from './component/heroes-list/heroes-list.component';
+import {HeroesFormComponent} from './component/heroes-form/heroes-form.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+    {path: '', pathMatch: 'full', component: HeroesListComponent},
+    {path: 'nuevo', component: HeroesFormComponent},
+];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class HeroesRoutingModule { }
+export class HeroesRoutingModule {
+}
