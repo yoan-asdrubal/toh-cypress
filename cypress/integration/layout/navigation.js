@@ -10,9 +10,4 @@ describe('Navigation component', () => {
         cy.url().should('include', 'dashboard');
     });
 
-    it('should redirect to pathNotFound when click on Heroes option', function () {
-        cy.visit('/');
-        cy.get('#id2').click();
-        cy.url().should('include', 'pathNotFound');
-    });
 })
