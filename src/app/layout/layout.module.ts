@@ -8,11 +8,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {LayoutModule} from '@angular/cdk/layout';
 import {RouterModule} from '@angular/router';
+import {Error404Component} from './components/error404/error404.component';
 
 @NgModule({
-    declarations: [NavigationComponent],
+    declarations: [NavigationComponent, Error404Component],
     exports: [
-        NavigationComponent
+        NavigationComponent, Error404Component
     ],
     imports: [
         CommonModule,
