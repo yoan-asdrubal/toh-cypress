@@ -1,0 +1,33 @@
+.breadcrumb {
+	height: 15px;
+	font-size: 12px;
+	letter-spacing: 0.3px;
+	color: #2a3f6e;
+	margin-left: 40px;
+	margin-top: 40px;
+	
+	a {
+		text-decoration: none;
+		color: #2a3f6e;
+	}
+	
+	.mat-icon {
+		font-size: 20px;
+		height: 20px;
+		width: 20px;
+		padding: 0 6px;
+		color: #2a3f6e;
+	}
+	
+	.breadcrumb-title.active {
+		font-weight: bold;
+		letter-spacing: 0.3px;
+	}
+	
+	.breadcrumb-item + .breadcrumb-item:before {
+		display: inline-block;
+		padding-right: .5rem;
+		padding-left: .5rem;
+		content: "/";
+	}
+}

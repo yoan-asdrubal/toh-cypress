@@ -1,0 +1,22 @@
+<section id="content">
+	<div *ngIf="loading" class="loader" id="loader" [ngClass]="{'loading':!loading}">
+		<div class="preloader"></div>
+	</div>
+
+	<iframe perfectScrollbar name="main" id="iframe" [src]="url | safe"
+	        [class.loading]="loading"
+	        [class.horizontal-menu]="settings.menu=='horizontal'"
+	        [class.vertical-menu]="settings.menu=='vertical'"
+	        [class.width-sm]="class=='width-sm'"
+	        [class.width-md]="class=='width-md'"
+	        [class.width-lg]="class=='width-lg'"
+
+	        sandbox="allow-modals allow-scripts allow-forms allow-popups allow-top-navigation allow-same-origin allow-popups-to-escape-sandbox"
+
+	>
+
+	</iframe>
+</section>
+
+
+

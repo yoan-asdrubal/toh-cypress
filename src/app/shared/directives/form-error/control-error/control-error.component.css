@@ -1,0 +1,11 @@
+.hide {
+	display: none;
+}
+
+.danger {
+	display: block;
+	color: #d64541;
+	font-size: 0.8rem;
+	margin-left: 10px;
+	/*margin-top: .25rem;*/
+}

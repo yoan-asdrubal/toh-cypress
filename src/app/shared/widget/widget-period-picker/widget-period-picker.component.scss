@@ -1,0 +1,20 @@
+#widget-period-picker-mat-form-fiel {
+	min-width: 135px;
+	width: 100%;
+	
+	.mat-form-field-wrapper {
+		.mat-form-field-flex {
+			.mat-form-field-suffix {
+				.mat-datepicker-toggle {
+					button {
+						span {
+							svg {
+								width: 2em !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

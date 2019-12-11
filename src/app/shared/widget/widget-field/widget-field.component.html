@@ -1,0 +1,19 @@
+<mat-form-field id="widget-field-mat-form-field" color="accent" [floatLabel]="floatLabel"
+                [class.hide-theme-color]="hideThemeColorClass ===true"
+                [appearance]="appearance" [class.outline-always]="outlineAlways!==false"
+                [class.show-outline]="outlineAlways===false && hideOutlineWhenValue===true && !inputControl.value"
+                [class.hide-outline]="outlineAlways===false && hideOutlineWhenValue===true && !!inputControl.value"
+                [class.no-padding]="noPadding !==false"
+>
+	<mat-label  >{{ skeleton && !inputControl.value ? '' : placeHolder}}</mat-label>
+	<ng-skeleton *ngIf="type==='text'" width="75%" height="15px" [isLoading]="skeleton">
+		<input matInput ngDefaultControl  [disableControl]="disabled" [autocomplete]="autocomplete"
+		       [formControl]="inputControl" >
+	</ng-skeleton>
+	<ng-skeleton *ngIf="type==='number'" width="75%" height="15px" [isLoading]="skeleton">
+		<input matInput ngDefaultControl  [disableControl]="disabled" [autocomplete]="autocomplete"
+		       [formControl]="inputControl" type="number">
+	</ng-skeleton>
+	<mat-icon matPrefix *ngIf="!!iconPreffix">{{iconPreffix}}</mat-icon>
+	<mat-icon matSuffix *ngIf="!!iconSuffix">{{iconSuffix}}</mat-icon>
+</mat-form-field>

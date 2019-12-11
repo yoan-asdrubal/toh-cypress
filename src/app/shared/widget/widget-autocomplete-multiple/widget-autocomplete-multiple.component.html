@@ -1,0 +1,63 @@
+<mat-form-field class="widget-autocomplete-multiple-mat-form-field"
+                [class.hide-theme-color]="hideThemeColorClass ===true"
+                [floatLabel]="floatLabel"
+                color="accent"
+                [appearance]="appearance"
+                [class.no-empty]="noEmptyClass===true">
+	<mat-label > {{ skeleton && !inputFormControl.value ? '' : placeHolder}}</mat-label>
+	<ng-skeleton width="75%" height="15px" [isLoading]="skeleton">
+		<input id="customInput"   matInput type="text"
+		       (keydown)="$event.preventDefault(); $event.stopPropagation()"
+		       [formControl]="inputFormControl"
+		       [matAutocomplete]="search_autocomplete"
+		       [matAutocompleteConnectedTo]="null">
+	</ng-skeleton>
+	<mat-icon class="arrow" matSuffix *ngIf="skeleton!==true">arrow_drop_down</mat-icon>
+
+	<mat-autocomplete #search_autocomplete="matAutocomplete"
+	                  class="widget-autocomplete-multiple-mat-autocomplete"
+	                  (opened)="inputSearchFocus()"
+	                  [panelWidth]="panelWidth">
+		<mat-option class="widget-autocomplete-multiple-search" disabled="disabled" (click)="$event.preventDefault()"
+		            [class.sticky]="stickSearch">
+			<div class="widget-filter-search-result-header">
+				<div class="widget-autocomplete-multiple-search-div-1">
+					<ng-template [ngIf]="showIconSearch === true ">
+						<mat-icon matSuffix *ngIf="searchFormCtrl.value.length === 0">search</mat-icon>
+						<mat-icon matSuffix *ngIf="searchFormCtrl.value.length !== 0" (click)="clearSearch($event)">
+							close
+						</mat-icon>
+					</ng-template>
+					<input #searchInput matInput placeholder="Buscar" [formControl]="searchFormCtrl"
+					       autocomplete="off">
+				</div>
+			</div>
+		</mat-option>
+
+		<mat-divider></mat-divider>
+		<mat-selection-list (selectionChange)="onItemsSelectionChange($event)">
+			<mat-list-option [id]="item?.id"
+			                 *ngFor="let item of filteredItems$ | async" [value]="item"
+			                 [selected]="itemsSelected.isSelected(item)"
+			                 [class.selected]="itemsSelected.isSelected(item)"
+			                 checkboxPosition="before">
+				<div id="widget-filter-search-result-data">
+					<div>
+						<span> {{(labelFn ? labelFn(item) : item[propLabel] || item) | titlecase}}</span>
+					</div>
+				</div>
+			</mat-list-option>
+			<mat-option [style.display]="'none'"></mat-option>
+		</mat-selection-list>
+		<div id="widget-autocomplete-multiple-no-result-data"
+		     *ngIf="(filteredItems$ | async).length === 0 ">
+			No hay coincidencias
+
+		</div>
+		<!--				<app-loading *ngIf="searching" height="215px"></app-loading>-->
+	</mat-autocomplete>
+
+
+</mat-form-field>
+<!--End Periodo-->
+<!--{{itemsSelected.selectedValues()  | json}}-->

@@ -1,0 +1,12 @@
+<div *ngIf="show" id="no-results"
+     [class]="class"
+     [style.width]="width"
+     [style.minWidth]="minWidth"
+     [style.height]="height"
+     [style.minHeight]="minHeight"
+>
+	<img src="assets/img/app/table-data-not-found.png" [style.width]="imgWidth">
+	<p [style.fontSize]="fontSize">
+		{{text}}
+	</p>
+</div>

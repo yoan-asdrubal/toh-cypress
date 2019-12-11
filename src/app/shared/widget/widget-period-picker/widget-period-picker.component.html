@@ -1,0 +1,15 @@
+<mat-form-field id="widget-period-picker-mat-form-fiel" color="accent" floatLabel="never"
+                [appearance]="appearance"
+
+>
+	<mat-label>{{ skeleton ? '' : placeHolder}}</mat-label>
+	<ng-skeleton width="75%" height="15px" [isLoading]="skeleton">
+		<input [min]="_min" [max]="_max" matInput [matDatepicker]="picker" name="rangeDateCtrl" ngDefaultControl
+		       [formControl]="rangeDateCtrl" (keydown)="$event.preventDefault()">
+	</ng-skeleton>
+	<mat-datepicker-toggle *ngIf="skeleton!==true" matSuffix [for]="picker"></mat-datepicker-toggle>
+	<mat-datepicker  (opened)="open()" (closed)="close()" #picker startView="year"
+	                (monthSelected)="dateInput($event,  picker)"
+	></mat-datepicker>
+
+</mat-form-field>

@@ -1,0 +1,23 @@
+<!--
+  ~
+  ~ Yoan Asdrubal Quintana Ramirez.
+  ~  8/7/2019
+  ~
+  -->
+
+<mat-form-field id="widget-date-picker-mat-form-field" color="accent" [floatLabel]="floatLabel"
+                [class.hide-theme-color]="hideThemeColorClass ===true"
+             s   [appearance]="appearance" [class.outline-always]="outlineAlways!==false"
+>
+	<!--                [class.show-outline]="outlineAlways===false  && !inputControl.value"-->
+	<!--                [class.hide-outline]="outlineAlways===false  && !!inputControl.value"-->
+	<mat-label >{{ skeleton && !inputControl.value ? '' : placeHolder}}</mat-label>
+	<ng-skeleton *ngIf="type==='text'" width="75%" height="15px" [isLoading]="skeleton">
+		<input matInput ngDefaultControl [matDatepicker]="picker3"
+		       [formControl]="inputControl">
+	</ng-skeleton>
+	<mat-datepicker #picker3>
+	</mat-datepicker>
+	<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+</mat-form-field>
+<!--{{inputControl.value | json}}-->

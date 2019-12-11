@@ -1,0 +1,84 @@
+<div id="widget-filter-container" class="widget-filter-container">
+	<div id="widget-filter" [style.width]="filterWidth" class="widget-filter" ngClass.lt-sm="lt-sm">
+		<div id="widget-filter-search" [style.width]="searchWidth" [style.flex]="flexGrowToSearchInput()">
+			<mat-form-field id="widget-filter-search-input" class="hide-theme-color" floatLabel="never" color="accent"
+			>
+				<ng-template [ngIf]="exportFilter===true">
+					<input #searchInput matInput type="text"
+					       placeholder="Buscar"
+					       autocomplete="off"
+					       (keydown.enter)="keyEnterInputFilter()"
+					       [formControl]="filterControl">
+				</ng-template>
+				<ng-template [ngIf]="exportFilter!==true">
+					<input #searchInput matInput type="text"
+					       placeholder="Buscar "
+					       [formControl]="filterControl"
+					       [matAutocomplete]="search_autocomplete"
+					       [matAutocompleteConnectedTo]="origin">
+
+					<mat-autocomplete #search_autocomplete="matAutocomplete" class="widget-filter-search-autocomplete"
+					                  [panelWidth]="panelWidth">
+						<mat-option id="widget-filter-header-option" disabled="disabled"
+						            (click)="$event.preventDefault()">
+							<div id="widget-filter-search-result-header">
+								<mat-checkbox color="accent"
+								              [disabled]="filteredItems.length===0"
+								              (click)="$event && filteredItems.length!==0 ? masterToggle() : null"
+								              [indeterminate]="itemsSelected.hasValue() && !itemsSelected.isAllSelected(filteredItems)"
+								              [checked]="itemsSelected.isAllSelected(filteredItems)"></mat-checkbox>
+								<ng-template ngFor [ngForOf]="templateConfig" let-config>
+									<span class="column-title" [style.width]="config?.width">{{config.label}}</span>
+								</ng-template>
+							</div>
+						</mat-option>
+
+						<mat-divider></mat-divider>
+						<mat-selection-list (selectionChange)="onItemsSelectionChange($event)">
+							<mat-list-option [id]="item?.id"
+							                 *ngFor="let item of filteredItems$ | async" [value]="item"
+							                 [selected]="itemsSelected.isSelected(item)"
+							                 [class.selected]="itemsSelected.isSelected(item)"
+							                 [disabled]="searching"
+							                 checkboxPosition="before">
+								<div id="widget-filter-search-result-data">
+									<ng-template ngFor [ngForOf]="templateConfig" let-config>
+										<span class="column-value" [style.width]="config?.width">
+											<ng-skeleton width="75%" height="15px" [isLoading]="searching">
+												{{ item ? (config.valueFn ? config.valueFn(item) : item[config.value]) : ''}}
+											</ng-skeleton>
+										</span>
+									</ng-template>
+								</div>
+
+							</mat-list-option>
+							<mat-option [style.display]="'none'"></mat-option>
+						</mat-selection-list>
+						<div id="widget-filter-search-no-result"
+						     *ngIf="(filteredItems$ | async).length === 0 && !searching">
+							<img src="assets/img/app/lupita@3x.png"/>
+							<span>La búsqueda no coinciden</span>
+						</div>
+						<!--				<app-loading *ngIf="searching" height="215px"></app-loading>-->
+					</mat-autocomplete>
+				</ng-template>
+
+
+			</mat-form-field>
+			<mat-icon id="widget-filter-search-icon" class="mat-18">search</mat-icon>
+		</div>
+		<ng-content></ng-content>
+		<!--End Periodo-->
+	</div>
+	<div class="widgetFilterBtn">
+		<ng-content select="[widgetFilterBtn]">
+
+		</ng-content>
+	</div>
+</div>
+<div id="widget-result-container">
+	<div *ngFor="let filter of getWidgetConfigValues()" class="filter-chip">
+		<label>{{filter.filter | titlecase}}</label>
+		<label class="remove" (click)="removeFilter(filter.key)"> &#x2716;</label>
+	</div>
+</div>
