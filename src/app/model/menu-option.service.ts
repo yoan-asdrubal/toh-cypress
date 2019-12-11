@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {menuData as menuArrayData} from './menu-option';
+import {menuData as menuArrayData, MenuOption} from './menu-option';
 import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuOptionService {
-    menuData = menuArrayData;
-    menuData$ = new BehaviorSubject(this.menuData);
+    menuData: MenuOption[] = menuArrayData;
+    menuData$: BehaviorSubject<MenuOption[]> = new BehaviorSubject(this.menuData);
 
     constructor() {
 
