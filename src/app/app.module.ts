@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutAppModule} from './layout/layout.module';
+import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import {LayoutAppModule} from './layout/layout.module';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        LayoutAppModule
+        LayoutAppModule,
+        RxReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
