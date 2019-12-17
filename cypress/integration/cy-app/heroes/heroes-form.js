@@ -38,7 +38,7 @@ describe('Heroes Form component', () => {
         cy.getWidgetFieldInput('name', hero.name).should('have.value', hero.name);
         cy.getWidgetFieldInput('skill').as('skills');
 
-        cy.getWidgetFieldInput('skill').within((skills) => {
+        cy.get('@skills').within((skills) => {
             cy.wrap(skills[0]).type(hero.skill[0])
                 .should('have.value', hero.skill[0]);
             cy.wrap(skills[1]).type(hero.skill[1])
@@ -63,7 +63,7 @@ describe('Heroes Form component', () => {
 
         cy.getWidgetFieldInput('name').should('have.value', '');
 
-        cy.getWidgetFieldInput('skill').then((skills) => {
+        cy.get('@skills').then((skills) => {
             cy.wrap(skills[0]).should('have.value', '');
             cy.wrap(skills[1]).should('have.value', '');
         });
