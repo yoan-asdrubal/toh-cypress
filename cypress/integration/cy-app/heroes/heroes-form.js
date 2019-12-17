@@ -36,15 +36,22 @@ describe('Heroes Form component', () => {
 
 
         cy.getWidgetFieldInput('name', hero.name).should('have.value', hero.name);
+        cy.getWidgetFieldInput('skill').as('skills');
 
-        cy.getWidgetFieldInput('skill').eq(0).type(hero.skill[0])
-            .should('have.value', hero.skill[0]);
+        cy.getWidgetFieldInput('skill').within((skills) => {
+            cy.wrap(skills[0]).type(hero.skill[0])
+                .should('have.value', hero.skill[0]);
+            cy.wrap(skills[1]).type(hero.skill[1])
+                .should('have.value', hero.skill[1]);
+        });
 
-        cy.getWidgetFieldInput('skill').eq(1).type(hero.skill[1])
-            .should('have.value', hero.skill[1]);
+        cy.get('@skills').first().should('have.value', hero.skill[0]);
+        cy.get('@skills').last().should('have.value', hero.skill[1]);
+
+        cy.get('@skills').its(0).should('have.value', hero.skill[0]);
+        cy.get('@skills').its(1).should('have.value', hero.skill[1]);
 
         cy.checkValidFormTemplate();
-        cy.checkInvalidFormTemplate(0);
 
         cy.server();
         cy.route('POST', '/hero', hero).as('addHero');
@@ -52,14 +59,19 @@ describe('Heroes Form component', () => {
         cy.getCY('submit').should('have.length', 1).click();
 
         cy.wait('@addHero')
-            .its('request.body').should('deep.equal', hero);
+            .its('response.body').should('deep.equal', hero);
 
-        cy.getWidgetField('name').should('have.class', 'ng-invalid');
+        cy.getWidgetFieldInput('name').should('have.value', '');
 
-        cy.getWidgetField('skill').eq(0).should('have.class', 'ng-invalid');
+        cy.getWidgetFieldInput('skill').then((skills) => {
+            cy.wrap(skills[0]).should('have.value', '');
+            cy.wrap(skills[1]).should('have.value', '');
+        });
 
-        cy.getWidgetField('skill').eq(1).should('have.class', 'ng-invalid');
+        cy.get('@skills').first().should('have.value', '');
+        cy.get('@skills').last().should('have.value', '');
 
-
+        cy.get('@skills').its(0).should('have.value', '');
+        cy.get('@skills').its(1).should('have.value', '');
     });
 })
