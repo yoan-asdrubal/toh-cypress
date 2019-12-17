@@ -1,1 +1,22 @@
-<p>heroes-form works!</p>
+<div>
+	<div class="page-title">
+		<h1>Heroes Form</h1>
+	</div>
+	<section class="page-content">
+		<form [formGroup]="form" *ngIf="form" (ngSubmit)="saveHero()">
+			<widget-field formControlName="name" placeHolder="Name">
+
+			</widget-field>
+			<button id="add-skill" (click)="addSkill()"> Add Skill</button>
+			<div [formGroup]="skill"
+			     *ngFor="let skill of form.controls.skill['controls']; let i = index"
+			>
+				<widget-field formControlName="skill" [placeHolder]="'Skill '+ i">
+
+				</widget-field>
+
+			</div>
+			<button type="submit" data-cy="submit"> Save</button>
+		</form>
+	</section>
+</div>

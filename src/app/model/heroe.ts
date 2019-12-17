@@ -6,14 +6,19 @@ export interface Heroe {
     skill: string;
 }
 
-export class HeroeForm {
+
+export class SkillForm {
     @required()
-    id: number;
+    skill: string;
+}
+
+export class HeroeForm {
 
     @required()
     @alphaNumeric()
     name: string;
 
-    @propArray()
-    skill: string[];
+    @propArray(SkillForm, {createBlank: true})
+    skill: SkillForm[];
 }
+

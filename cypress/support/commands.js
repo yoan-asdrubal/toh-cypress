@@ -23,3 +23,30 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getWidgetField', (name, value) => {
+    if (!!value)
+        return cy.get(`[formControlName="${name}"]`).type(value);
+    return cy.get(`[formControlName="${name}"]`);
+});
+
+Cypress.Commands.add('getWidgetFieldInput', (name, value) => {
+    if (!!value)
+        return cy.get(`[formControlName="${name}"] input`).type(value);
+    return cy.get(`[formControlName="${name}"] input`);
+});
+
+
+Cypress.Commands.add('checkValidFormTemplate', () => {
+    cy.get('ng-invalid').should('have.length', 0);
+});
+
+
+Cypress.Commands.add('checkInvalidFormTemplate', (invalids) => {
+    cy.get('[formControlName] .ng-invalid').should('have.length', invalids);
+});
+
+Cypress.Commands.add('getCY', (attr) => {
+    return cy.get(`[data-cy="${attr}"]`);
+});
+

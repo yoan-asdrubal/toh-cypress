@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutAppModule} from './layout/layout.module';
 import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
+import {SharedModule} from '@app/shared/shared.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -16,7 +18,9 @@ import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
         AppRoutingModule,
         BrowserAnimationsModule,
         LayoutAppModule,
-        RxReactiveFormsModule
+        RxReactiveFormsModule,
+        HttpClientModule,
+        SharedModule
     ],
     providers: [],
     bootstrap: [AppComponent]
