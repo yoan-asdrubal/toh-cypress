@@ -18,6 +18,9 @@ export class HeroeForm {
     @alphaNumeric()
     name: string;
 
+    @required()
+    date: number;
+
     @propArray(SkillForm, {createBlank: true})
     skill: SkillForm[];
 }

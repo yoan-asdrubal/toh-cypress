@@ -7,6 +7,9 @@
 			<widget-field formControlName="name" placeHolder="Name">
 
 			</widget-field>
+			<widget-date-picker placeHolder="Date" formControlName="date">
+
+			</widget-date-picker>
 			<button id="add-skill" (click)="addSkill()"> Add Skill</button>
 			<div [formGroup]="skill"
 			     *ngFor="let skill of form.controls.skill['controls']; let i = index"
@@ -19,4 +22,5 @@
 			<button type="submit" data-cy="submit"> Save</button>
 		</form>
 	</section>
+	<!--	{{form.value | json}}-->
 </div>

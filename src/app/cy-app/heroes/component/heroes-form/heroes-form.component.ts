@@ -18,6 +18,7 @@ export class HeroesFormComponent implements OnInit {
 
     ngOnInit() {
         const heroe = new HeroeForm();
+        heroe.date = 1575262800000;
         heroe.skill = new Array<SkillForm>();
         this.form = this.formB.formGroup(heroe);
     }
@@ -29,7 +30,9 @@ export class HeroesFormComponent implements OnInit {
 
     saveHero() {
         if (this.form.valid) {
-            this.heroS.addHero(this.form.value)
+            const value = this.form.value;
+            value.skill = (this.form.value.skill as Array<any>).map(skill => skill.skill);
+            this.heroS.addHero(value)
                 .pipe(
                     tap(() => this.form.reset())
                 ).subscribe();

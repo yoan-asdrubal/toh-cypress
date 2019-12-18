@@ -38,12 +38,15 @@ describe('Heroes Form component', () => {
         cy.getWidgetFieldInput('name', hero.name).should('have.value', hero.name);
         cy.getWidgetFieldInput('skill').as('skills');
 
+        cy.getWidgetFieldInput('date', '02/12/2019').should('have.value', '02/12/2019');
+
         cy.get('@skills').within((skills) => {
             cy.wrap(skills[0]).type(hero.skill[0])
                 .should('have.value', hero.skill[0]);
             cy.wrap(skills[1]).type(hero.skill[1])
                 .should('have.value', hero.skill[1]);
         });
+
 
         cy.get('@skills').first().should('have.value', hero.skill[0]);
         cy.get('@skills').last().should('have.value', hero.skill[1]);
@@ -59,7 +62,12 @@ describe('Heroes Form component', () => {
         cy.getCY('submit').should('have.length', 1).click();
 
         cy.wait('@addHero')
-            .its('response.body').should('deep.equal', hero);
+            .then((req) => {
+                delete hero['default'];
+                assert.deepEqual(req.requestBody, hero);
+            });
+        // cy.wait('@addHero')
+        //     .its('response.body').should('deep.equal', hero);
 
         cy.getWidgetFieldInput('name').should('have.value', '');
 
