@@ -66,7 +66,7 @@ export class WidgetAutocompleteComponent implements OnInit, AfterViewInit, OnCha
 	 * Define las propiedades del objeto sobre las que se aplicará el filtro,
 	 * en caso de no especificarse se tomara por defecto el key descripcion
 	 */
-	@Input() filterKeys = ['descripcion'];
+	@Input() filterKeys = [];
 
 	/**
 	 * Template para mostrar cuando no existan resultados en la búsqueda, es opcional.
