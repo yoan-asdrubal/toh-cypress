@@ -24,28 +24,30 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getWidgetField', (name, value) => {
-    if (!!value)
-        return cy.get(`[formControlName="${name}"]`).type(value);
+Cypress.Commands.add('getWidgetField', (name) => {
+
     return cy.get(`[formControlName="${name}"]`);
 });
 
+// Devuelve el input especificado correspondiente al formControlName especificado parametros
+// En caso de especificarle un valor lo escribe en el input
 Cypress.Commands.add('getWidgetFieldInput', (name, value) => {
     if (!!value)
-        return cy.get(`[formControlName="${name}"] input`).type(value);
+        return cy.get(`[formControlName="${name}"] input`).clear().type(value);
     return cy.get(`[formControlName="${name}"] input`);
 });
 
-
+// Chequea que el formulario sea valido
 Cypress.Commands.add('checkValidFormTemplate', () => {
     cy.get('ng-invalid').should('have.length', 0);
 });
 
-
+// Chequea que la cantidad de campos no validos sea la especificada por parametros
 Cypress.Commands.add('checkInvalidFormTemplate', (invalids) => {
     cy.get('[formControlName] .ng-invalid').should('have.length', invalids);
 });
 
+// Devuelve el resultado de un selector usando atributo data-cy
 Cypress.Commands.add('getCY', (attr) => {
     return cy.get(`[data-cy="${attr}"]`);
 });
