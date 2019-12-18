@@ -38,7 +38,8 @@ describe('Heroes Form component', () => {
         cy.getWidgetFieldInput('name', hero.name).should('have.value', hero.name);
         cy.getWidgetFieldInput('skill').as('skills');
 
-        cy.getWidgetFieldInput('date', '02/12/2019').should('have.value', '02/12/2019');
+        cy.selectDate('date', 2, 12, 2019);
+        cy.getWidgetFieldInput('date' ).should('have.value', '02/12/2019');
 
         cy.get('@skills').within((skills) => {
             cy.wrap(skills[0]).type(hero.skill[0])
@@ -81,5 +82,6 @@ describe('Heroes Form component', () => {
 
         cy.get('@skills').its(0).should('have.value', '');
         cy.get('@skills').its(1).should('have.value', '');
+
     });
 })

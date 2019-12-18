@@ -18,7 +18,6 @@ export class HeroesFormComponent implements OnInit {
 
     ngOnInit() {
         const heroe = new HeroeForm();
-        heroe.date = 1575262800000;
         heroe.skill = new Array<SkillForm>();
         this.form = this.formB.formGroup(heroe);
     }
