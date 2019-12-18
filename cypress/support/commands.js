@@ -52,6 +52,7 @@ Cypress.Commands.add('getCY', (attr) => {
     return cy.get(`[data-cy="${attr}"]`);
 });
 
+// Especifica la fecha definida por parametros en el widget-date-picker especificado por @param name
 Cypress.Commands.add('selectDate', (name, day, month, year) => {
     const labelMonth = ['ENE.', 'FEB.', 'MAR.', 'ABR.', 'MAY.', 'JUN.', 'JUL.', 'AGO.', 'SEP.', 'OCT.', 'NOV.', 'DIC.']
     cy.get(`[formControlName="${name}"]`).as('date');
@@ -60,4 +61,39 @@ Cypress.Commands.add('selectDate', (name, day, month, year) => {
     cy.get('.mat-calendar-body-cell-content').contains(year).click();
     cy.get('.mat-calendar-body-cell-content').contains(labelMonth[month - 1]).click();
     cy.get('.mat-calendar-body-cell-content').contains(day).click();
+    return cy.get('@date');
+});
+
+// WidgetAutocomplete
+// Comprueba que se muestran la cantidad de opciones especificadas para el widget autocomplete
+Cypress.Commands.add('widgetAutocompleteCheckOptions', (name, options) => {
+    cy.get(`[formControlName="${name}"]`).as('autocomplete');
+    cy.get('@autocomplete').click();
+    cy.get('.widget-autocomplete-option').should('have.length', options);
+    return cy.get('@autocomplete');
+});
+
+// Selecciona un elemento dentro del WidgetAutocomplete
+Cypress.Commands.add('widgetAutocompleteSelectOption', (name, option) => {
+    cy.get(`[formControlName="${name}"]`).as('autocomplete');
+    cy.get('@autocomplete').click();
+    cy.get('.widget-autocomplete-option').contains(option).should('have.length', 1);
+    cy.get('.widget-autocomplete-option').contains(option).click();
+    return cy.get('@autocomplete');
+});
+// Realiza y chequea el resultado de la busqueda en el widgetAutocomplete
+Cypress.Commands.add('widgetAutocompleteSearch', (name, search, results, values) => {
+    cy.get(`[formControlName="${name}"]`).as('autocomplete');
+    cy.get('@autocomplete').click();
+    cy.get('input.input-filter').focus().type(search).should('have.value', search);
+    cy.get('.widget-autocomplete-option').should('have.length', results);
+    if (!!values) {
+        cy.get('.widget-autocomplete-option span')
+            .should((val) => {
+                const options = val.map((i, el) => Cypress.$(el).text()).get();
+                expect(options).to.have.length(results);
+                expect(options).to.deep.eq(values);
+            })
+    }
+    return cy.get('@autocomplete');
 });
