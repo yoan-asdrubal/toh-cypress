@@ -21,6 +21,9 @@ export class HeroeForm {
     @required()
     date: number;
 
+    @required()
+    category: string;
+
     @propArray(SkillForm, {createBlank: true})
     skill: SkillForm[];
 }

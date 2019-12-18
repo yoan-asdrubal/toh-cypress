@@ -4,6 +4,7 @@ import {FormArray, FormGroup} from '@angular/forms';
 import {HeroeForm, SkillForm} from '@app/model/heroe';
 import {HeroService} from '@app/model/hero.service';
 import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-heroes-form',
@@ -12,11 +13,13 @@ import {tap} from 'rxjs/operators';
 })
 export class HeroesFormComponent implements OnInit {
     form: FormGroup;
+    category: Observable<any>;
 
     constructor(private formB: RxFormBuilder, private heroS: HeroService) {
     }
 
     ngOnInit() {
+        this.category = this.heroS.getCategory();
         const heroe = new HeroeForm();
         heroe.skill = new Array<SkillForm>();
         this.form = this.formB.formGroup(heroe);

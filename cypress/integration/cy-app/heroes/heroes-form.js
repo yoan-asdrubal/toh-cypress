@@ -1,4 +1,5 @@
 import * as hero from '../../../fixtures/hero';
+import * as nomencladores from '../../../fixtures/nomenclador';
 
 describe('Heroes Form component', () => {
     it('should render from HeroesListComponent', function () {
@@ -15,6 +16,7 @@ describe('Heroes Form component', () => {
     });
 
     it('should Render form with to skill field', function () {
+        cy.visit('/heroes/nuevo');
         cy.get('form')
             .should('have.length', 1)
             .within(() => {
@@ -32,14 +34,32 @@ describe('Heroes Form component', () => {
 
     });
 
-    it('should submit form when valid with tow skill field', function () {
+    it.only('should submit form when valid with tow skill field', function () {
 
+        cy.server();
+        cy.route('POST', '/hero', hero).as('addHero');
+        cy.route('GET', '/category', nomencladores.category).as('categorias');
+
+        cy.visit('/heroes/nuevo');
+
+        cy.wait('@categorias');
 
         cy.getWidgetFieldInput('name', hero.name).should('have.value', hero.name);
-        cy.getWidgetFieldInput('skill').as('skills');
+
 
         cy.selectDate('date', 2, 12, 2019);
-        cy.getWidgetFieldInput('date' ).should('have.value', '02/12/2019');
+        cy.getWidgetFieldInput('date').should('have.value', '02/12/2019');
+
+        cy.widgetAutocompleteCheckOptions('category', 3);
+        cy.widgetAutocompleteSearch('category', 'o', 2, ["Junior", "Senior"]);
+        cy.widgetAutocompleteSelectOption('category', 'Junior');
+
+        cy.getWidgetFieldInput('name').click();
+
+        cy.get('#add-skill').focus().should('have.length', 1)
+            .click()
+            .click();
+        cy.getWidgetFieldInput('skill').as('skills');
 
         cy.get('@skills').within((skills) => {
             cy.wrap(skills[0]).type(hero.skill[0])
@@ -57,8 +77,6 @@ describe('Heroes Form component', () => {
 
         cy.checkValidFormTemplate();
 
-        cy.server();
-        cy.route('POST', '/hero', hero).as('addHero');
 
         cy.getCY('submit').should('have.length', 1).click();
 
