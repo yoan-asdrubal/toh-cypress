@@ -52,3 +52,12 @@ Cypress.Commands.add('getCY', (attr) => {
     return cy.get(`[data-cy="${attr}"]`);
 });
 
+Cypress.Commands.add('selectDate', (name, day, month, year) => {
+    const labelMonth = ['ENE.', 'FEB.', 'MAR.', 'ABR.', 'MAY.', 'JUN.', 'JUL.', 'AGO.', 'SEP.', 'OCT.', 'NOV.', 'DIC.']
+    cy.get(`[formControlName="${name}"]`).as('date');
+    cy.get('@date').find('mat-datepicker-toggle button', {force: true}).click();
+    cy.get('.mat-calendar-header .mat-calendar-controls .mat-calendar-period-button').click();
+    cy.get('.mat-calendar-body-cell-content').contains(year).click();
+    cy.get('.mat-calendar-body-cell-content').contains(labelMonth[month - 1]).click();
+    cy.get('.mat-calendar-body-cell-content').contains(day).click();
+});
