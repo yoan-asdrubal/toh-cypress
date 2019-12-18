@@ -34,7 +34,7 @@ describe('Heroes Form component', () => {
 
     });
 
-    it.only('should submit form when valid with tow skill field', function () {
+    it('should submit form when valid with tow skill field', function () {
 
         cy.server();
         cy.route('POST', '/hero', hero).as('addHero');
