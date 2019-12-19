@@ -23,6 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import * as meses from "../fixtures/mes.json"
 
 Cypress.Commands.add('getWidgetField', (name) => {
 
@@ -54,7 +55,7 @@ Cypress.Commands.add('getCY', (attr) => {
 
 // Especifica la fecha definida por parametros en el widget-date-picker especificado por @param name
 Cypress.Commands.add('selectDate', (name, day, month, year) => {
-    const labelMonth = ['ENE.', 'FEB.', 'MAR.', 'ABR.', 'MAY.', 'JUN.', 'JUL.', 'AGO.', 'SEP.', 'OCT.', 'NOV.', 'DIC.']
+    const labelMonth = meses.monthLabel;
     cy.get(`[formControlName="${name}"]`).as('date');
     cy.get('@date').find('mat-datepicker-toggle button', {force: true}).click();
     cy.get('.mat-calendar-header .mat-calendar-controls .mat-calendar-period-button').click();
@@ -101,7 +102,7 @@ Cypress.Commands.add('widgetAutocompleteSearch', (name, search, results, values)
 // Period Picker
 // Especifica como periodo el mes y año seleccionado en el calendar
 Cypress.Commands.add('selectPeriod', (name, month, year) => {
-    const labelMonth = ['ENE.', 'FEB.', 'MAR.', 'ABR.', 'MAY.', 'JUN.', 'JUL.', 'AGO.', 'SEP.', 'OCT.', 'NOV.', 'DIC.']
+    const labelMonth = meses.monthLabel;
     cy.get(`[formControlName="${name}"]`).as('date');
     cy.get('@date').find('mat-datepicker-toggle button', {force: true}).click();
     cy.get('.mat-calendar-header .mat-calendar-controls .mat-calendar-period-button').click().click();
