@@ -97,3 +97,15 @@ Cypress.Commands.add('widgetAutocompleteSearch', (name, search, results, values)
     }
     return cy.get('@autocomplete');
 });
+
+// Period Picker
+// Especifica como periodo el mes y año seleccionado en el calendar
+Cypress.Commands.add('selectPeriod', (name, month, year) => {
+    const labelMonth = ['ENE.', 'FEB.', 'MAR.', 'ABR.', 'MAY.', 'JUN.', 'JUL.', 'AGO.', 'SEP.', 'OCT.', 'NOV.', 'DIC.']
+    cy.get(`[formControlName="${name}"]`).as('date');
+    cy.get('@date').find('mat-datepicker-toggle button', {force: true}).click();
+    cy.get('.mat-calendar-header .mat-calendar-controls .mat-calendar-period-button').click().click();
+    cy.get('.mat-calendar-body-cell-content').contains(year).click();
+    cy.get('.mat-calendar-body-cell-content').contains(labelMonth[month - 1]).click();
+    return cy.get('@date');
+});
