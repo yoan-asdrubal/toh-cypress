@@ -10,6 +10,7 @@
     "e2e": "ng e2e",
     "ci:start-server": "angular-http-server --path ./dist/toh-cypress -p 4200",
     "cy:run": "cypress run",
+    "cy:open": "cypress open",
     "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cy:run",
     "cy:verify": "cypress verify"
   },
