@@ -13,6 +13,10 @@
 			<widget-autocomplete placeHolder="Categoria" formControlName="category" [items]="category | async">
 
 			</widget-autocomplete>
+
+			<widget-period-picker placeHolder="Periodo" formControlName="periodo">
+
+			</widget-period-picker>
 			<button id="add-skill" (click)="addSkill()"> Add Skill</button>
 			<div [formGroup]="skill"
 			     *ngFor="let skill of form.controls.skill['controls']; let i = index"
