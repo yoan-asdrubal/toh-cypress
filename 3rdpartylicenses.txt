@@ -110,6 +110,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+@angular/material/autocomplete
+
 @angular/material/button
 
 @angular/material/card
@@ -225,6 +227,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng-skeleton-man
 
 ng2-right-click-menu
+MIT
+
+ngx-reactivetoolkit
 MIT
 
 ngx-take-until-destroy
