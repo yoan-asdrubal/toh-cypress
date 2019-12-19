@@ -48,6 +48,7 @@ describe('Heroes Form component', () => {
 
 
         cy.selectDate('date', 2, 12, 2019);
+        hero.date = new Date(2019, 11, 2).getTime();
         cy.getWidgetFieldInput('date').should('have.value', '02/12/2019');
 
         cy.widgetAutocompleteCheckOptions('category', 3);
