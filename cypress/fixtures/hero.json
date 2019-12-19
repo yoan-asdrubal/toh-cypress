@@ -1,6 +1,10 @@
 {
   "name": "Endeavor",
   "date": 1575262800000,
+  "periodo": {
+    "mes": 12,
+    "anno": 2019
+  },
   "category": "Junior",
   "skill": [
     "Half Cold",

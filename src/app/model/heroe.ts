@@ -22,6 +22,9 @@ export class HeroeForm {
     date: number;
 
     @required()
+    periodo: any;
+
+    @required()
     category: string;
 
     @propArray(SkillForm, {createBlank: true})
